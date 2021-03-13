@@ -20,7 +20,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/apexchart.client.js'],
+  plugins: ["~/plugins/apexchart.client.js"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -38,7 +38,7 @@ export default {
 
   axios: {
     baseURL: "http://localhost:4000", // set env var API_URL to override baseURL
-    credentials: true, // pass cookies with each request
+    credentials: true // pass cookies with each request
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -46,7 +46,7 @@ export default {
 
   auth: {
     redirect: {
-      logout: '/login',
+      logout: "/login"
     },
     strategies: {
       local: false,

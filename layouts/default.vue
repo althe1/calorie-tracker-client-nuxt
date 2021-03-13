@@ -1,6 +1,12 @@
 <template>
-  <b-container fluid class="p-0" style="height: 100vh;">
-    <b-navbar v-if="$auth.loggedIn" sticky toggleable="lg" type="dark" variant="info">
+  <b-container fluid class="p-0 pt-5">
+    <b-navbar
+      v-if="$auth.loggedIn"
+      sticky
+      toggleable="lg"
+      type="dark"
+      variant="info"
+    >
       <b-button @click="onLogout" variant="secondary" class="ml-auto">
         Logout
       </b-button>
@@ -12,9 +18,9 @@
 <script>
 export default {
   methods: {
-    async onLogout () {
+    async onLogout() {
       await this.$auth.logout();
     }
   }
-}
+};
 </script>

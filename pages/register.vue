@@ -1,10 +1,10 @@
 <template>
   <b-row class="justify-content-center h-75 align-items-center">
     <b-col md="3" class="border p-4">
-      <b-alert v-model="loginAlert" variant="danger"
-        >Please check your login credentials and retry.</b-alert
+      <b-alert v-model="registerAlert" variant="danger"
+        >Please renter username and passwords.</b-alert
       >
-      <b-form @submit.prevent="onLogin">
+      <b-form @submit.prevent="onRegister">
         <b-form-group label="Username:">
           <b-form-input
             v-model="form.username"
@@ -20,10 +20,15 @@
             required
           ></b-form-input>
         </b-form-group>
-        <div class="ml-auto">
-          <b-button type="submit" variant="primary">Login</b-button>
-          <b-link to="/register">Register New User</b-link>
-        </div>
+        <b-form-group label="Validate Password:">
+          <b-form-input
+            v-model="form.password2"
+            type="password"
+            placeholder="Enter password again"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <b-button type="submit" variant="success">Register</b-button>
       </b-form>
     </b-col>
   </b-row>
@@ -35,17 +40,23 @@ export default {
     return {
       form: {
         username: "",
-        password: ""
+        password: "",
+        password2: ""
       },
-      loginAlert: false
+      registerAlert: false
     };
   },
   methods: {
-    async onLogin() {
+    async onRegister() {
       try {
+        if (this.form.password !== this.form.password2) {
+          this.registerAlert = 3;
+          return;
+        }
+        await this.$axios.post("/users/register", this.form);
         await this.$auth.loginWith("cookie", { data: this.form });
       } catch {
-        this.loginAlert = 3;
+        this.registerAlert = 3;
       }
     }
   }
